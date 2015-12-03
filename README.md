@@ -18,6 +18,7 @@ Besides, you can modify it for your own usage.
 ## In `sign.scss`, change its style.
 
 > The following part is for the  mail sign's style.
+> IMPORTANT: if you want to change the logo, you can replace the logo in `/public/images` folder.
 
 ```
 /* o2_sign
