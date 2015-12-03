@@ -1,9 +1,7 @@
 #o2 Mail Sign
--
 This is a generator for our team's email signature.
 
 # Installation
--
 First, `git clone` it  . <br>
 Then, `npm install` with the command lines.
 
@@ -20,7 +18,7 @@ Besides, you can modify it for your own usage.
 > The following part is for the  mail sign's style.
 > IMPORTANT: if you want to change the logo, you can replace the logo in `/public/images` folder.
 
-```
+```scss
 /* o2_sign
 ---------------------------------------- */
 $sign_logo: '../images/sign_logo.png';
@@ -62,7 +60,6 @@ $sign_dividingline_bgColor: $c_o2_blue_dark;
 > It depends on [dom-to-image](https://github.com/tsayen/dom-to-image) & [FileSaver](https://github.com/eligrey/FileSaver.js).Use Canvas to output the mail signature and save as an image file.
 
 # Dependencies
--
 - [Vue](http://cn.vuejs.org/)
 - [dom-to-image](https://github.com/tsayen/dom-to-image)
 - [Filesaver](https://github.com/eligrey/FileSaver.js)
@@ -71,5 +68,4 @@ $sign_dividingline_bgColor: $c_o2_blue_dark;
 THANKS to the authors.
 
 # License
--
 MIT
