@@ -49,42 +49,42 @@
 		<!-- S input -->
 		<div class="o2_form">
 			<div class="o2_form_row o2_input_required">
-				<label for="image" class="o2_label">Profile picture</label>
+				<label for="image" class="o2_label">头像</label>
 				<div class="o2_input_file">
-					<span class="o2_input_name">Upload Picture</span>
+					<span class="o2_input_name">上传图片</span>
 					<input type="file" id="uploadImage">
 				</div>
 			</div>
 			<div class="o2_form_row">
-				<label for="c_name" class="o2_label">Chinese Name</label>
+				<label for="c_name" class="o2_label">中文名</label>
 				<input type="text" class="o2_input_text"  name="c_name" placeholder="中文名" v-model="info.c_name" >
 			</div>
 			<div class="o2_form_row">
-				<label for="e_name" class="o2_label">English Name</label>
+				<label for="e_name" class="o2_label">英文名</label>
 				<input type="text" class="o2_input_text" name="e_name" placeholder="英文名" v-model="info.e_name" >
 			</div>
 			<div class="o2_form_row">
-				<label for="group" class="o2_label">Team</label>
+				<label for="group" class="o2_label">所属部门小组</label>
 				<input type="text" class="o2_input_text" name="group" placeholder="所属部门小组" v-model="info.group">
 			</div>
 			<div class="o2_form_row">
-				<label for="phone" class="o2_label">Tel No.</label>
+				<label for="phone" class="o2_label">手机号码</label>
 				<input type="text" class="o2_input_text" name="phone" placeholder="手机号码" v-model="info.contact.phone" >
 			</div>
 			<div class="o2_form_row">
-				<label for="call" class="o2_label">Office No.</label>
-				<input type="text" class="o2_input_text" name="call" placeholder="分机号" v-model="info.contact.call">
+				<label for="call" class="o2_label">办公号码</label>
+				<input type="text" class="o2_input_text" name="call" placeholder="办公号码" v-model="info.contact.call">
 			</div>
 			<div class="o2_form_row">
 				<label for="qq" class="o2_label">QQ</label>
 				<input type="text" class="o2_input_text" name="qq" placeholder="QQ" v-model="info.contact.qq">
 			</div>
 			<div class="o2_form_row">
-				<label for="wechat" class="o2_label">Wechat</label>
+				<label for="wechat" class="o2_label">微信</label>
 				<input type="text" class="o2_input_text" name="wechat" placeholder="微信" v-model="info.contact.wechat">
 			</div>
 			<div class="o2_btns btn_download">
-				<a href="javascript:;" class="o2_btn bg1 " v-on:click="downloadRes()">Download</a>	
+				<a href="javascript:;" class="o2_btn bg1 " v-on:click="downloadRes()">生成签名</a>	
 			</div>
 		</div>
 		<!-- E input -->
@@ -105,7 +105,7 @@
 			</div>
 		</div>
 		<div class="o2_btns cropper_btn">
-			<a href="javascript:;" class="o2_btn bg1" v-on:click="finishCropImage()">Done</a>
+			<a href="javascript:;" class="o2_btn bg1" v-on:click="finishCropImage()">完成</a>
 		</div>
 	</div>
 	<!-- E cropper -->
