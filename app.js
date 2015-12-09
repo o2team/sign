@@ -25,6 +25,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/sign', function (req, res) {
+  res.redirect('/sign/')
+})
+
 app.use('/', routes);
 app.use('/sign', routes);
 app.use('/users', users);
