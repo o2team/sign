@@ -16,12 +16,12 @@ Besides, you can modify it for your own usage.
 ## In `sign.scss`, change its style.
 
 > The following part is for the  mail sign's style.
-> IMPORTANT: if you want to change the logo, you can replace the logo in `/public/images` folder.
+> IMPORTANT: Limited to the [dom-to-image](https://github.com/tsayen/dom-to-image),only base64 dataurl can be used as an logo image.
 
 ```scss
 /* o2_sign
 ---------------------------------------- */
-$sign_logo: '../images/sign_logo.png';
+$sign_logo: 'data:image/png;base64....';
 $sign_logo_bgColor: $c_o2_blue;
 $sign_dividingline_bgColor: $c_o2_blue_dark;
 
