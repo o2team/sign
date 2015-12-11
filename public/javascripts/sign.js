@@ -111,12 +111,12 @@ var sign = new Vue({
             thisObj.flag.imgHasLoad = false;
         },
         downloadRes: function() {
+            var thisObj = this;
             var sign = document.getElementById('sign');
-            var imgName = this.info.e_name;
-            domtoimage.toBlob(sign)
-                .then(function(blob) {
-                    window.saveAs(blob, imgName + '.png');
-                });
+            var imgName = this.info.e_name; 
+            domtoimage.toBlob(sign).then(function(blob){
+                window.saveAs(blob,imgName + '.png');
+            });
         }
     }
 })
@@ -143,6 +143,6 @@ Vue.filter('formatOfficeNo', function(value) {
     if (value) {
         if (value.indexOf('-') !== -1) return value;
         var num = value ? value : '1234';
-        return '0755-3299-' + num;
+        return '0755-32995555-' + num;
     }
 });

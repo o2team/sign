@@ -35,11 +35,11 @@
 				</div>
 				<div class="info">
 					<div class="title">
-						<p class="e_name" v-text="info.e_name? info.e_name : 'NAME'"></p><p class="c_name" v-text="info.c_name ? info.c_name:'姓名'"></p><p class="group" v-text="info.group ? info.group:'所属部门小组'"></p>
+						<p class="e_name" v-text="info.e_name? info.e_name : 'NAME'"></p><p class="c_name" v-text="info.c_name ? info.c_name:'姓名'"></p><p class="group" v-text="info.group ? info.group:'所属部门'"></p>
 					</div>
 					<div class="contact">
 						<p class="icon-mobile mobile" v-text="(info.contact.phone?info.contact.phone:'123-4567-8901') | formatTelNo "></p>
-						<p class="icon-call call" v-text="(info.contact.call?info.contact.call:'0755-3299-1234') | formatOfficeNo"></p>
+						<p class="icon-call call" v-text="(info.contact.call?info.contact.call:'0755-32995555-1234') | formatOfficeNo"></p>
 						<p class="icon-qq qq" v-text="info.contact.qq ? info.contact.qq:'your QQ'"></p>
 						<p class="icon-wechat wechat" v-text="info.contact.wechat ? info.contact.wechat:'your wechat'"></p>
 					</div>
@@ -65,7 +65,7 @@
 				<input type="text" class="o2_input_text" name="e_name" placeholder="英文名" v-model="info.e_name" >
 			</div>
 			<div class="o2_form_row">
-				<label for="group" class="o2_label">所属部门小组</label>
+				<label for="group" class="o2_label">所属部门</label>
 				<input type="text" class="o2_input_text" name="group" placeholder="所属部门小组" v-model="info.group">
 			</div>
 			<div class="o2_form_row">
@@ -115,6 +115,7 @@
 	<script type="text/javascript" src="javascripts/vue.min.js"></script>
 	<script type="text/javascript" src="javascripts/cropper.min.js"></script>
 	<script type="text/javascript" src="javascripts/dom-to-image.min.js"></script>
+	<script type="text/javascript" src="javascripts/html2canvas.js"></script>
 	<script type="text/javascript" src="javascripts/FileSaver.min.js"></script>
 	<script type="text/javascript" src="javascripts/sign.js"></script>
 	<!-- E scripts -->
