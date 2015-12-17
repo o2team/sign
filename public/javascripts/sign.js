@@ -14,6 +14,7 @@ var sign = new Vue({
         },
         cropper: null,
         flag: {
+            needLoadSign: false,
             imgHasLoad: false,
             cropperHasInit: false,
             previewHasCreate: false
