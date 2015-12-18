@@ -1,71 +1,40 @@
-#o2 Mail Sign
-This is a generator for our team's email signature.
+# O2 Mail Sign
 
-# Installation
-First, `git clone` it  . <br>
-Then, `npm install` with the command lines.
+`hexo`版本开发指南，确保本地已经安装了`hexo`，若无安装执行下面代码安装：
 
-# Usage
-```
-# first, Use the follow command to set up the project.
-> npm start
-# then, visit localhost:3000
-```
-Besides, you can modify it for your own usage.
-
-## In `sign.scss`, change its style.
-
-> The following part is for the  mail sign's style.
-> IMPORTANT: Limited to the [dom-to-image](https://github.com/tsayen/dom-to-image),only base64 dataurl can be used as an logo image.
-
-```scss
-/* o2_sign
----------------------------------------- */
-$sign_logo: 'data:image/png;base64....';
-$sign_logo_bgColor: $c_o2_blue;
-$sign_dividingline_bgColor: $c_o2_blue_dark;
-
-.o2_sign {
-	display: inline-block;
-	position: relative;
-	@extend %border_box;
-	width: 600px;
-	height: 100px;
-	padding-left: 200px;
-	background-color: $c2;
-	...
-	
+```bash
+npm i -g hexo-cli
 ```
 
-## In `sign.js`, improve its function.
+安装好`hexo`之后执行下面命令：
 
->Learning [Vue.js](http://cn.vuejs.org/) make it easy for you to understand how it works.And here's some simple explain.
+```bash
 
+# 拉取项目源码
+git clone https://github.com/o2team/sign.git
 
-###loadCroper()
+# 切换到dev分支
+git checkout dev
 
->Initialize the cropper to crop the head picture which is  depends on 
-[cropperjs](https://github.com/fengyuanchen/cropperjs)
+# 安装依赖
+npm i -d
 
-### bindLoadImgEvent()
+# 预览
+hexo s --watch
+```
 
-> Use the HTML5 File API  to upload the image file.After finish loading the file , it invokes the loadCropper() function.
+浏览器打开 [http://localhost:4000/sign/] 预览效果，若需要修改源码，请修改 `themes/sign` 目录里面的代码，修改之后预览效果即可。
 
-### finishCropImage()
+代码没问题之后执行下面代码提交到 `github` 分支 `dev` 上：
 
-> When finishing cropped the image, it output the result(base64 dataurl) as the head picture's src.
+```bash
+git push origin dev
+```
 
-### downloadRes()
+同时发布到 `aotu.io/sign` ，执行下面代码：
 
-> It depends on [dom-to-image](https://github.com/tsayen/dom-to-image) & [FileSaver](https://github.com/eligrey/FileSaver.js).Use Canvas to output the mail signature and save as an image file.
+```bash
+hexo d -g
+```
 
-# Dependencies
-- [Vue](http://cn.vuejs.org/)
-- [dom-to-image](https://github.com/tsayen/dom-to-image)
-- [Filesaver](https://github.com/eligrey/FileSaver.js)
-- [cropper](https://github.com/fengyuanchen/cropperjs)
-
-THANKS to the authors.
-
-# License
-MIT
+然后打开浏览器 [http://aotu.io/sign/](http://aotu.io/sign/) 查看即可。
