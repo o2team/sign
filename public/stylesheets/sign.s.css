@@ -24,7 +24,7 @@
   -ms-box-flex: 1;
   -webkit-box-flex: 1; }
 
-.o2_sign, .o2_sign .info .contact > p, .o2_box, .o2_form .o2_form_row, .o2_form .o2_input_text, .o2_form .o2_input_file input, .o2_form .o2_input_file, .cropper {
+.o2_cover .o2_cover_hd, .o2_sign, .o2_sign .info .contact > p, .o2_box, .o2_form .o2_form_row, .o2_form .o2_input_text, .o2_form .o2_input_file input, .o2_form .o2_input_file, .cropper {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
@@ -34,7 +34,7 @@
   -webkit-appearance: none;
   -webkit-border-radius: 0; }
 
-.o2_sign .info .contact:after, .o2_form:after {
+.o2_cover .o2_cover_hd:after, .o2_sign .info .contact:after, .o2_form:after {
   clear: both;
   content: '\20';
   display: block; }
@@ -120,6 +120,121 @@ body {
 
 /* colors
 ---------------------------------------- */
+/* o2_cover
+---------------------------------------- */
+.o2_cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff url(../images/cover_bg.png) no-repeat center;
+  background-size: cover;
+  color: #fff; }
+  .o2_cover .o2_cover_hd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 28px 46px 0 46px;
+    z-index: 1; }
+    .o2_cover .o2_cover_hd h1 {
+      float: left;
+      color: transparent; }
+      .o2_cover .o2_cover_hd h1 .o2_logo {
+        display: inline-block;
+        vertical-align: middle;
+        width: 213px;
+        height: 43px;
+        background: transparent url(../images/o2_logo.png) no-repeat; }
+    .o2_cover .o2_cover_hd .lnks {
+      float: right;
+      font-size: 18px;
+      line-height: 1; }
+      .o2_cover .o2_cover_hd .lnks a {
+        display: inline-block;
+        color: #fff;
+        margin-right: 46px; }
+        .o2_cover .o2_cover_hd .lnks a:last-child {
+          margin-right: 0; }
+  .o2_cover .o2_cover_content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 46px;
+    background: rgba(0, 0, 0, 0.2); }
+    .o2_cover .o2_cover_content .title {
+      position: absolute;
+      top: 260px;
+      left: 46px;
+      width: 460px; }
+      .o2_cover .o2_cover_content .title h2 {
+        position: relative;
+        display: inline-block;
+        text-align: left;
+        font-weight: normal;
+        font-size: 60px;
+        line-height: 1;
+        margin-bottom: 10px; }
+      .o2_cover .o2_cover_content .title small {
+        position: relative;
+        display: block;
+        font-size: 20px; }
+    .o2_cover .o2_cover_content .o2_cover_btn {
+      position: absolute;
+      top: 550px;
+      left: 46px;
+      display: block;
+      width: 240px;
+      height: 42px;
+      line-height: 42px;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      background-color: #6190e8;
+      -webkit-border-radius: 42px;
+      border-radius: 42px; }
+
+/* o2_main
+---------------------------------------- */
+.o2_main {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -305px;
+  margin-left: -400px;
+  padding: 50px 100px 25px 100px;
+  background: #fff;
+  visibility: hidden;
+  transition: all .5s ease;
+  -webkit-transform: translateY(150%);
+  transform: translateY(150%); }
+  .o2_main.show {
+    visibility: visible;
+    -webkit-transform: translateY(0);
+    transform: translateY(0); }
+  .o2_main .o2_main_close {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    top: 0;
+    right: 0; }
+    .o2_main .o2_main_close:after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      content: '\2715';
+      font-size: 24px;
+      color: #34495e; }
+    .o2_main .o2_main_close:hover {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+      transition: all 0.5s ease; }
+
 /* o2_sign
 ---------------------------------------- */
 .o2_sign {
@@ -339,21 +454,27 @@ input::-webkit-input-placeholder {
 
 /* cropper & alert
 ---------------------------------------- */
-.show {
-  display: block !important; }
-
 .o2_alert_mask {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 89;
-  background: rgba(0, 0, 0, 0.1); }
+  background: rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  height: 0;
+  transition: all .3s ease; }
+  .o2_alert_mask.show {
+    visibility: visible;
+    height: 100%; }
 
 .o2_alert {
-  display: none;
+  opacity: 0;
+  transition: all .3s ease;
+  visibility: hidden;
+  -webkit-transform: scale(2);
+  transform: scale(2);
   padding: 30px;
   position: fixed;
   z-index: 90;
@@ -364,6 +485,11 @@ input::-webkit-input-placeholder {
   -webkit-border-radius: 5px;
   border-radius: 5px;
   overflow: hidden; }
+  .o2_alert.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    -webkit-transform: scale(1); }
   .o2_alert .o2_alert_close {
     position: absolute;
     width: 30px;

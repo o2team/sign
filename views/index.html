@@ -7,25 +7,34 @@
    
   <title>o2 Mail Sign</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  	<!-- S scripts -->
+  	<!-- S links -->
 	<link rel="stylesheet" href="stylesheets/cropper.min.css">
 	<link rel="stylesheet" href="stylesheets/sign.s.css">
-	<!-- E scripts-->
+	<!-- E links-->
 </head>
 <body id="app" >
-	<!-- S header -->
-	<div class="o2_header">
-		<i class="icon_logo"></i>
-		<div class="title">
-			<h1>Mail Signature</h1>
-			<small>凹凸实验室邮件签名</small>
+	<!-- S cover -->
+	<div class="o2_cover">
+		<div class="o2_cover_hd">
+			<h1><i class="o2_logo"></i>凹凸实验室</h1>
+			<div class="lnks">
+				<a href="#">博客首页</a>
+				<a href="#">关于凹凸</a>
+			</div>
+		</div>
+		<div class="o2_cover_content" >
+			<div class="title">
+				<h2>邮箱签名设计</h2>
+				<small>你的邮箱还缺一个个性名片吗? 马上输入个人信息</small><small>一键生成，让你的每封邮件都与众不同</small>
+			</div>
+			<a href="#" class="o2_cover_btn" v-on:click="flag.needLoadSign=true;">立即生成邮件签名</a>
 		</div>
 	</div>
-	<!-- E header-->
+	<!-- E cover-->
+
 	<!-- S main -->
-	
-	<!-- E main-->
-	<div class="o2_main">
+	<div class="o2_main" v-bind:class="{'show':flag.needLoadSign}" >
+		<span class="o2_main_close" v-on:click="flag.needLoadSign=false;"></span>
 		<!-- S preview -->
 		<div class="o2_box">
 			<span class="o2_box_type">预览</span>
@@ -89,11 +98,12 @@
 			</div>
 		</div>
 		<!-- E input -->
-	</div><!-- /main -->
-	
+	</div>
+	<!-- E main-->
+
 	<!-- S cropper -->
-	<div class="o2_alert_mask" v-bind:class="{'show':flag.imgHasLoad}" transition="expand"></div>
-	<div class="o2_alert" v-bind:class="{'show':flag.imgHasLoad}" transition="alert">
+	<div class="o2_alert_mask" v-bind:class="{'show':flag.imgHasLoad}" ></div>
+	<div class="o2_alert" v-bind:class="{'show':flag.imgHasLoad}" >
 		<span class="o2_alert_close" v-on:click="flag.imgHasLoad=false;"></span>
 		<div class="cropper">
 			<div class="cropper_box" id="cropperBox">
