@@ -1,0 +1,33 @@
+title: Aotu.io - 邮件签名设计
+description: "凹凸实验室邮件签名系统"
+author: 凹凸实验室
+language: zh-cn
+timezone: UTC
+url: http://aotu.io/sign
+root: /sign/
+permalink: :title/
+archive_dir: 
+code_dir: downloads/code
+new_post_name: :year-:month-:day-:title.md # File name of new posts
+post_asset_folder: true
+highlight:
+  enable: true
+  line_number: false
+per_page: 0
+
+theme: sign
+deploy:
+  type: git
+  repo: git@github.com:o2team/sign.git
+  branch: gh-pages
+
+disqus_shortname:
+google_analytics: UA-4910098-10
+baidu_analytics: bb4b770d7fdf4e05245cd1327199d813
+fb_admins: 100000247608790
+swiftype_key: nxhXzi1rDss_9_P_6zBa
+twitter: o2circle
+github: o2team/guide
+gh:
+  user: o2team
+  repo: sign
