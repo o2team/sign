@@ -3,8 +3,8 @@ description: "凹凸实验室邮件签名系统"
 author: 凹凸实验室
 language: zh-cn
 timezone: UTC
-url: http://aotu.io/sign
-root: /sign/
+url: http://sign.aotu.io/
+root: /
 permalink: :title/
 archive_dir: 
 code_dir: downloads/code
