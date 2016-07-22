@@ -1,3 +1,67 @@
+// filter
+Vue.filter('formatTelNo', function(val) {
+    if (val) {
+        if (val.indexOf('-') !== -1) return val;
+        var arr = val.split('');
+        var resArr = [];
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+            resArr.push(arr[i]);
+            if ((i === 2 || ((i - 2) % 4 === 0)) && i !== (len - 1)) {
+                resArr.push('-');
+            }
+        }
+        return resArr.join('');
+    }
+});
+Vue.filter('formatOfficeNo', function(val) {
+    if (val) {
+        if (val.indexOf('-') !== -1) return val;
+        var num = val ? val : '1234';
+        return '0755-32995555-' + num;
+    }
+});
+
+Vue.filter('formatColor',{ // 格式化颜色值，允许#RRGGBB、#RGB形式
+    read: function(value){
+        return value.toUpperCase();
+    },
+    write: function(value,OldVal){
+        if(/^#(?:[0-9a-fA-F]{3}){1,2}$/.test(value)){
+           var len = value.length;
+           var newValue = '';
+           if(len == 4) {
+              var tmp = value.split('').splice(1);
+              newValue = tmp.map(function(item){
+                return item + item; 
+              });
+              return '#' + newValue.join('').toUpperCase();
+           }
+           return value.toUpperCase();
+        }else {
+            return value;
+        }
+    }
+});
+
+// directive
+Vue.directive('validate', {
+    update: function(value){
+        if(value.hasOwnProperty('color')){ //检测颜色值是否有效
+            var thisEl = this.el;
+            if(!/^#(?:[0-9a-fA-F]{3}){1,2}$/.test(value.color)){
+                console.log(value.color);
+                thisEl.classList.add('error');
+            }else {
+                if(thisEl.classList.contains('error')){
+                    thisEl.classList.remove('error');
+                }
+            }
+        }
+    }
+})
+
+// instance
 var sign = new Vue({
     el: '#app',
     data: {
@@ -53,7 +117,7 @@ var sign = new Vue({
                 co_line: '#000050'
              }
         },
-        checkIfChrome: function(){// 检测是否为chrome浏览器，如果不是不支持配色设置
+        checkIfChrome: function(){// 检测是否为chrome浏览器，如果不是，则不支持配色设置
             var thisObj = this;
             var reg_Chrome = /chrome\/[\d.]+/gi;
             var bowser = navigator.userAgent.match(reg_Chrome);
@@ -153,31 +217,5 @@ var sign = new Vue({
         }
     }
 })
-
-
-// filter
-Vue.filter('formatTelNo', function(value) {
-    if (value) {
-        if (value.indexOf('-') !== -1) return value;
-        var arr = value.split('');
-        var resArr = [];
-        var len = arr.length;
-        for (var i = 0; i < len; i++) {
-            resArr.push(arr[i]);
-            if ((i === 2 || ((i - 2) % 4 === 0)) && i !== (len - 1)) {
-                resArr.push('-');
-            }
-        }
-        return resArr.join('');
-    }
-});
-Vue.filter('formatOfficeNo', function(value) {
-    if (value) {
-        if (value.indexOf('-') !== -1) return value;
-        var num = value ? value : '1234';
-        return '0755-32995555-' + num;
-    }
-});
-
 
 

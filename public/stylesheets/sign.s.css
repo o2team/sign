@@ -217,6 +217,7 @@ body {
 /* o2_warn 
 ---------------------------------------- */
 .o2_warn {
+  display: none;
   position: absolute;
   font-weight: bold;
   top: 50%;
@@ -227,8 +228,9 @@ body {
   font-size: 16px;
   background: rgba(250, 255, 123, 0.9);
   transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  z-index: 90; }
+  -webkit-transform: translate(-50%, -50%); }
+  .o2_warn.show {
+    display: block; }
 
 /* o2_main
 ---------------------------------------- */
@@ -315,7 +317,8 @@ body {
       line-height: 1;
       color: #000;
       font-weight: bold;
-      margin-bottom: 15px; }
+      margin-bottom: 15px;
+      white-space: nowrap; }
       .o2_sign .info .title > p {
         display: inline-block; }
       .o2_sign .info .title .e_name {
@@ -412,7 +415,10 @@ body {
     background: url(../images/colors.png) no-repeat;
     background-size: 30px auto;
     cursor: pointer;
-    font-size: 0; }
+    font-size: 0;
+    transition: all 0.5s ease; }
+    .o2_box .o2_color_setting:hover {
+      transform: scale(1.1); }
 
 /* o2_content
 ---------------------------------------- */
@@ -450,6 +456,9 @@ input::-webkit-input-placeholder {
     outline: none;
     -webkit-border-radius: 4px;
     border-radius: 4px; }
+    .o2_form .error.o2_input_text, .o2_form .o2_input_file input.error, .o2_form .o2_input_color input.error[type="color"] {
+      color: #e4393c;
+      border-color: #e4393c !important; }
   .o2_form .o2_label {
     display: block;
     font-size: 14px;
@@ -523,7 +532,7 @@ input::-webkit-input-placeholder {
         background-color: #f2f2f2; }
 
 .btn_download {
-  width: 220px;
+  width: 50%;
   margin: 0 auto; }
 
 /* cropper & alert

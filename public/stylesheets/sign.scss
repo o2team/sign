@@ -138,6 +138,10 @@ $c_input: #1abc9c;
 /* o2_warn 
 ---------------------------------------- */
 .o2_warn {
+	&.show {
+		display: block;
+	}
+	display:none;
 	position: absolute;
 	font-weight: bold;
 	top: 50%;
@@ -149,7 +153,6 @@ $c_input: #1abc9c;
 	background: rgba(250, 255, 123, 0.9);
 	transform: translate(-50%, -50%);
 	-webkit-transform: translate(-50%, -50%);
-	z-index: 90;
 }
 /* o2_main
 ---------------------------------------- */
@@ -251,6 +254,7 @@ $sign_dividingline_bgColor: $c_o2_blue_dark;
 			color: $c_o2_black;
 			font-weight: bold;
 			margin-bottom: 15px;
+			white-space: nowrap;
 			> p {
 				display: inline-block;
 			}
@@ -375,6 +379,10 @@ $sign_dividingline_bgColor: $c_o2_blue_dark;
 		background-size: 30px auto;
 		cursor: pointer;
 		font-size: 0;
+    	transition: all 0.5s ease;
+		&:hover {
+			transform: scale(1.1);
+		}
 	}
 }
 
@@ -422,6 +430,10 @@ input::-webkit-input-placeholder {
 		font-size: 14px;
 		outline: none;
 		@include radius(4px);
+		&.error {
+			color: $color_red;
+			border-color: $color_red !important;
+		}
 	}
 	.o2_label {
 		display: block;
@@ -518,7 +530,7 @@ input::-webkit-input-placeholder {
 }
 
 .btn_download {
-	width: 220px;
+	width: 50%;
 	margin: 0 auto;
 }
 
