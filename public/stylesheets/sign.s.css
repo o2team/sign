@@ -612,25 +612,3 @@ input::-webkit-input-placeholder {
       overflow: hidden;
       border: 1px solid #999;
       background-color: #fff; }
-
-/* vue transition 
----------------------------------------- */
-.alert-transition {
-  transition: all .3s ease;
-  visibility: visible;
-  transform: scale(1);
-  -webkit-transform: scale(1); }
-
-.alert-enter, .alert-leave {
-  visibility: hidden;
-  -webkit-transform: scale(0.3);
-  transform: scale(0.3); }
-
-.expand-transition {
-  transition: all .3s ease;
-  visibility: visible;
-  height: 100%; }
-
-.expand-enter, .expand-leave {
-  visibility: hidden;
-  height: 0; }
