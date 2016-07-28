@@ -37,4 +37,4 @@ git push origin dev
 hexo d -g
 ```
 
-然后打开浏览器 [http://aotu.io/sign/](http://aotu.io/sign/) 查看即可。
+然后打开浏览器 [https://sign.aotu.io](https://sign.aotu.io) 查看即可。
