@@ -86,6 +86,7 @@ var sign = new Vue({
         },
         cropper: null,
         flag: {
+            isPC: false,
             showBowserUnsupport: false,
             needLoadSign: false,
             showColorSetting: false,
@@ -103,10 +104,26 @@ var sign = new Vue({
         }
     },
     ready: function() {
+        this.checkIfPC();
         this.checkIfChrome();
         this.bindLoadImgEvent();
     },
     methods: {
+        checkIfPC: function(){
+            var thisObj = this;
+            var t = null;
+            var func = function(){
+                console.log('tes');
+                thisObj.flag.isPC = screen.width<=600?true:false;
+                console.log(thisObj.flag.isPC);
+                return;
+            };
+            func();
+            window.addEventListener('resize',function(){
+                if(t) { clearTimeout(t);}
+                t = setTimeout(func,300);
+            });
+        },
         resetColors: function(){ // 重置配色
             var thisObj = this;
              thisObj.style = {

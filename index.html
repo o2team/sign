@@ -1,213 +1,224 @@
 <!DOCTYPE HTML>
 <html lang="zh-CN" >
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="format-detection" content="telephone=no"/>  
-  <title>o2 Mail Sign</title>
-  <!-- S links -->
-  <link rel="stylesheet" href="/css/cropper.min.css">
-  <link rel="stylesheet" href="/css/sign.min.css">
-  <!-- E links-->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>  
+    <title>o2 Mail Sign</title>
+    <!-- S links -->
+    <link rel="stylesheet" href="/css/cropper.min.css">
+    <link rel="stylesheet" href="/css/sign.min.css">
+    <!-- E links-->
 </head>
 <body id="app" >
-  <!-- S cover -->
-  <div class="o2_cover">
-    <div class="o2_cover_hd">
-      <h1><i class="o2_logo"></i>凹凸实验室</h1>
-      <div class="lnks">
-        <a href="http://aotu.io/notes/" target="_blank">博客首页</a>
-        <a href="http://aotu.io/about/" target="_blank">关于凹凸</a>
-      </div>
+    <!-- S mobile -->
+    <div class="o2_tip" v-if="flag.isPC">
+        <i class="icon_logo"></i>
+        <p class="name">邮箱签名设计</p>
+        <p>/一键生成，让你的每封邮件都与众不同/</p>
+        <small>暂不支持移动端使用，请使用PC端浏览</small>
     </div>
-    <div class="o2_cover_content" >
-      <div class="title">
-        <h2>邮箱签名设计</h2>
-        <small>你的邮箱还缺一个个性名片吗? 马上输入个人信息</small><small>一键生成，让你的每封邮件都与众不同</small>
-      </div>
-      <a href="#" class="o2_cover_btn" v-on:click="flag.needLoadSign=true;">立即生成邮件签名</a>
-    </div>
-  </div>
-  <!-- E cover-->
+    <!-- E mobile -->
 
-  <!-- S warn -->
-  <div class="o2_warn" v-bind:class="{'show':flag.showBowserUnsupport}">
-      为了更好地体验功能，请将浏览器切换或升级至Chrome 49.x 版本以上，感谢支持！
-  </div>
-  <!-- E warn-->
-  
-  <!-- S main -->
-  <div class="o2_main" v-bind:class="{'show':flag.needLoadSign}" >
-    <span class="o2_main_close" v-on:click="flag.needLoadSign=false;"></span>
-    <!-- S preview -->
-    <div class="o2_box">
-      <span class="o2_box_type">预览</span>
-      <span class="o2_color_setting" title="配色设置" v-on:click="flag.showColorSetting = !flag.showColorSetting">配色</span>
-      <div class="o2_sign" id="sign" :style="{ backgroundColor:style.co_bg }" >
-        <div class="logo">
-          <img src="data:image/png;base64,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" alt="logo" v-on:click="flag.showColorSetting = !flag.showColorSetting">
+    <main class="o2_mail_sign" v-if="!flag.isPC">
+        <!-- S cover -->
+        <div class="o2_cover">
+            <div class="o2_cover_hd">
+                <h1><i class="o2_logo"></i>凹凸实验室</h1>
+                <div class="lnks">
+                    <a href="http://aotu.io/notes/">博客首页</a>
+                    <a href="http://aotu.io/about/">关于凹凸</a>
+                </div>
+            </div>
+            <div class="o2_cover_content" >
+                <div class="title">
+                    <h2>邮箱签名设计</h2>
+                    <small>你的邮箱还缺一个个性名片吗? 马上输入个人信息</small><small>一键生成，让你的每封邮件都与众不同</small>
+                </div>
+                <a href="#" class="o2_cover_btn" v-on:click="flag.needLoadSign=true;">立即生成邮件签名</a>
+            </div>
         </div>
-        <div class="img">
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAIAAAAiOjnJAAAIf0lEQVR4nO3bW1PaWh+A8RUSwAMnQUs9QhEVcabTy37/Gz9Bi1YoblGrRfGApSKH7ItM82aSiIL5zztlP78rDGEJywdIFqjt7+8rIGih//cdwHQiLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIgwgh3u4eHh+vq63W53u93BYGCaplLKMIxoNDo3N5dKpRYWFjRNe3GQ29vb+/v7brfb6/WUUrquh8PhRCKRTqcTicQr78nbB3m7/+yEaPv7+4EM1Ov16vV6q9Uavdv8/PyHDx9isZjvtY+Pj/V6/e7ubsQI8Xi8WCxGo9HndghkkLf7j09IMGH1er0vX748Pj6+ZudQKFQul71T2W63Dw8P+/3+iyMYhrG3tzc7O+u9KpBB3o4JCeYYq1qtvnISlVLD4fDw8HAwGDg3Pj09vfLxK6X6/f7BwcFwOHRtD2SQQDAhAYT18PAw+mXWq9fr/fjxw7ml0Wi88vFbut3u2dmZa2Mgg9iq1erNzc1z17ZarVqtZh0zuUzrhIwlgIP3q6srn3ENo1AopFKpTqfj+/S9ublZW1uzLg8GA99BlpeXV1dXh8Nho9FoNpuuay8vL9fW1uwj30AGsVWr1aurq1artbu7G4/HXdfe3d1Vq1XryV0oFFw3n8oJGVcAr1j39/fejevr6+l0OhQKxWKxQqHg3eH379/25ZubG+9TPx6P53I5wzAikcjm5ubc3Jxrh36/3263gx1EKWWaplWVUmo4HB4cHPz69cu5Q7vd/vbtm1VVs9n0vm5N2YRMJoCwksnk4uJiKpWKxWKzs7ORSETTtIWFBXuH+fn50SM8PDx4N2YyGeePi4uLo28YyCDqzwKB/eNgMKhUKvYLTKfTOTg4cB4PXV9fu0aYsgmZTABvhblcbvQO3W7XuzESidiXO52OdwfX7Pv+MZyvJYEMopSKx+P5fL5er9tb+v1+pVLZ29szTdNVlVIqn8+73iunbEImE/ACqa+LiwvvxlQqZV9+enry7uCcaKWU7xKL8+0jkEEs2Wy23+83Gg17S7fb/fr1q2mart+ysbGRzWa9Y472103IBMTDajabP3/+dG3UNO3du3f2j9ZCsEs4HB7xo8V5yhPIILbV1dXBYHB+fm5v8R5ur6ysrKyseG872l86IeOSDevs7Mz5vLdls1nnYaPv2onrxMT3PMU5BYEM4rSxsdHr9bznTZalpaWNjQ3fq0b4qydkLFJh9Xq9Wq12e3vrvco6MXlxBNdjDoV8zjNeXM174yCbm5uDwcD7sUwmk9nc3Bz9q12mY0JeTySsdrt9dHTk+x6fSCR2dna8D891RKyUGg6HzoftuxSp63qwg7iYpul7k3GXeaZmQl4v+LDOz88bjYbvPc5ms/l83vtX8Z0C1wi+T6MX53HcQVxqtZrv4vvV1ZVhGPl8/rkbOk3ThLxekGGZpnl8fHx5eem9Stf1QqHgWkSxhcNh75Fmr9dzPkLfKTCM/93/QAZxqtfrvivXlouLC13X19fXn9tBTd2EjCWwL/qZpnl0dOQ7ialU6tOnT89NolJqZmbGu9G12OO79uO8YSCD2E5PT12PZWZmxnVyfnZ25vqAz2nKJmRcgYVVq9W8B7mapuVyuVKp5Htaa/P9qoZrmc53Odh5w0AGsVxcXJyenjq3RKPRcrlcLpdd60D//POPd+3AMk0TMoFgwjo/P/e+a4RCoVKptLy8/OLNk8mkd6NzQNM0fU/7nUvegQyilLq7uzs+PnZuCYfDpVIpEolEo9FSqeQ6BPn+/bv3w7VpmpDJBPBu+vj46Ls2MxwOK5XKiBt+/vzZupBIJAzDcC2fdDqdWq2Wy+Wsz+G9nzMYhuGcu0AGscZJp9P2i42u66VSyX4Sz83N7e7uVioV+7g4k8m4vqM3ZRMymQDCOjk58T3lGcvKysrJyYlrY7PZfG59Uim1tLTkOp8KZBBN07a2to6OjlqtlvUa4/pALRaLbW9vHx4eDofDTCZTLBZdI0zZhEzmrW+F3W53xLfhXu/9+/fer3CMoOv66uqqxCDqT1uLi4vb29u+7wvJZLJYLC4tLW1tbbn+DFM5IRN4a1jX19dvf3aqP8cfrkPj5+i6vrOz4z0rDmQQi6ZpxWLR+cGwSzqd9l18n9YJGddbwxr3O7gjRCKRjx8/Or+35CsWi5XL5ef+XSmQQd6CCbG8NU/fL/1MzDCMnZ2d+/v7Vqtl/y+epmnWNx7j8XgymRzxKhLgIBNjQiyB/V8h4MS/2EMEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUHEvyMk5JrjtRNHAAAAAElFTkSuQmCC" alt="头像">
+        <!-- E cover-->
+        
+        <!-- S warn -->
+        <div class="o2_warn" v-bind:class="{'show':flag.showBowserUnsupport}">
+            为了更好地体验功能，请将浏览器切换或升级至Chrome 49.x 版本以上，感谢支持！
         </div>
-        <div class="line" :style="{ backgroundColor:style.co_line }"></div>
-        <div class="info">
-          <div class="title" :style="{ color:style.co_title }">
-            <p class="e_name" v-text="info.e_name? info.e_name : 'NAME'"></p>
-            <p class="c_name" v-text="info.c_name ? info.c_name:'姓名'"></p>
-            <div class="hr" :style="{ backgroundColor:style.co_title }"></div>
-            <p class="group" v-text="info.group ? info.group:'所属部门'"></p>
-          </div>
-          <div class="contact" :style="{ color: style.co_item }">
-            <div class="item">
-              <i class="icon-mobile mobile" :style="{ color:style.co_icon }"></i> 
-              <p v-text="(info.contact.phone?info.contact.phone:'123-4567-8901') | formatTelNo "></p>
-            </div>
-            <div class="item">
-              <i class="icon-call call" :style="{ color:style.co_icon }"></i>
-              <p v-text="(info.contact.call?info.contact.call:'0755-32995555-1234') | formatOfficeNo"></p>
-            </div>
-            <div class="item">
-              <i class="icon-qq qq" :style="{ color:style.co_icon }"></i>
-              <p v-text="info.contact.qq ? info.contact.qq:'your QQ'"></p>
-            </div>
-            <div class="item">
-              <i class="icon-wechat wechat" :style="{ color:style.co_icon }"></i>
-              <p v-text="info.contact.wechat ? info.contact.wechat:'your wechat'"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- E preview -->
+        <!-- E warn-->
 
-    <!-- S content -->
-    <div class="o2_content" >
-      <div class="o2_content_slider" v-bind:class="{'slide':flag.showColorSetting}">
-        <!-- S input -->
-        <div class="o2_form">
-          <div class="o2_form_row o2_input_required">
-            <label for="image" class="o2_label">头像</label>
-            <div class="o2_input_file">
-              <span class="o2_input_name">上传图片</span>
-              <input type="file" class="J_uploadImage" data-dest="img">
+        <!-- S main -->
+        <div class="o2_main" v-bind:class="{'show':flag.needLoadSign}" >
+            <span class="o2_main_close" v-on:click="flag.needLoadSign=false;"></span>
+            <!-- S preview -->
+            <div class="o2_box">
+                <span class="o2_box_type">预览</span>
+                <span class="o2_color_setting" title="配色设置" v-on:click="flag.showColorSetting = !flag.showColorSetting">配色</span>
+                <div class="o2_sign" id="sign" :style="{ backgroundColor:style.co_bg }" >
+                    <div class="logo">
+                        <img src="data:image/png;base64,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" alt="logo" v-on:click="flag.showColorSetting = !flag.showColorSetting">
+                    </div>
+                    <div class="img">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAIAAAAiOjnJAAAIf0lEQVR4nO3bW1PaWh+A8RUSwAMnQUs9QhEVcabTy37/Gz9Bi1YoblGrRfGApSKH7ItM82aSiIL5zztlP78rDGEJywdIFqjt7+8rIGih//cdwHQiLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIggLIgwgh3u4eHh+vq63W53u93BYGCaplLKMIxoNDo3N5dKpRYWFjRNe3GQ29vb+/v7brfb6/WUUrquh8PhRCKRTqcTicQr78nbB3m7/+yEaPv7+4EM1Ov16vV6q9Uavdv8/PyHDx9isZjvtY+Pj/V6/e7ubsQI8Xi8WCxGo9HndghkkLf7j09IMGH1er0vX748Pj6+ZudQKFQul71T2W63Dw8P+/3+iyMYhrG3tzc7O+u9KpBB3o4JCeYYq1qtvnISlVLD4fDw8HAwGDg3Pj09vfLxK6X6/f7BwcFwOHRtD2SQQDAhAYT18PAw+mXWq9fr/fjxw7ml0Wi88vFbut3u2dmZa2Mgg9iq1erNzc1z17ZarVqtZh0zuUzrhIwlgIP3q6srn3ENo1AopFKpTqfj+/S9ublZW1uzLg8GA99BlpeXV1dXh8Nho9FoNpuuay8vL9fW1uwj30AGsVWr1aurq1artbu7G4/HXdfe3d1Vq1XryV0oFFw3n8oJGVcAr1j39/fejevr6+l0OhQKxWKxQqHg3eH379/25ZubG+9TPx6P53I5wzAikcjm5ubc3Jxrh36/3263gx1EKWWaplWVUmo4HB4cHPz69cu5Q7vd/vbtm1VVs9n0vm5N2YRMJoCwksnk4uJiKpWKxWKzs7ORSETTtIWFBXuH+fn50SM8PDx4N2YyGeePi4uLo28YyCDqzwKB/eNgMKhUKvYLTKfTOTg4cB4PXV9fu0aYsgmZTABvhblcbvQO3W7XuzESidiXO52OdwfX7Pv+MZyvJYEMopSKx+P5fL5er9tb+v1+pVLZ29szTdNVlVIqn8+73iunbEImE/ACqa+LiwvvxlQqZV9+enry7uCcaKWU7xKL8+0jkEEs2Wy23+83Gg17S7fb/fr1q2mart+ysbGRzWa9Y472103IBMTDajabP3/+dG3UNO3du3f2j9ZCsEs4HB7xo8V5yhPIILbV1dXBYHB+fm5v8R5ur6ysrKyseG872l86IeOSDevs7Mz5vLdls1nnYaPv2onrxMT3PMU5BYEM4rSxsdHr9bznTZalpaWNjQ3fq0b4qydkLFJh9Xq9Wq12e3vrvco6MXlxBNdjDoV8zjNeXM174yCbm5uDwcD7sUwmk9nc3Bz9q12mY0JeTySsdrt9dHTk+x6fSCR2dna8D891RKyUGg6HzoftuxSp63qwg7iYpul7k3GXeaZmQl4v+LDOz88bjYbvPc5ms/l83vtX8Z0C1wi+T6MX53HcQVxqtZrv4vvV1ZVhGPl8/rkbOk3ThLxekGGZpnl8fHx5eem9Stf1QqHgWkSxhcNh75Fmr9dzPkLfKTCM/93/QAZxqtfrvivXlouLC13X19fXn9tBTd2EjCWwL/qZpnl0dOQ7ialU6tOnT89NolJqZmbGu9G12OO79uO8YSCD2E5PT12PZWZmxnVyfnZ25vqAz2nKJmRcgYVVq9W8B7mapuVyuVKp5Htaa/P9qoZrmc53Odh5w0AGsVxcXJyenjq3RKPRcrlcLpdd60D//POPd+3AMk0TMoFgwjo/P/e+a4RCoVKptLy8/OLNk8mkd6NzQNM0fU/7nUvegQyilLq7uzs+PnZuCYfDpVIpEolEo9FSqeQ6BPn+/bv3w7VpmpDJBPBu+vj46Ls2MxwOK5XKiBt+/vzZupBIJAzDcC2fdDqdWq2Wy+Wsz+G9nzMYhuGcu0AGscZJp9P2i42u66VSyX4Sz83N7e7uVioV+7g4k8m4vqM3ZRMymQDCOjk58T3lGcvKysrJyYlrY7PZfG59Uim1tLTkOp8KZBBN07a2to6OjlqtlvUa4/pALRaLbW9vHx4eDofDTCZTLBZdI0zZhEzmrW+F3W53xLfhXu/9+/fer3CMoOv66uqqxCDqT1uLi4vb29u+7wvJZLJYLC4tLW1tbbn+DFM5IRN4a1jX19dvf3aqP8cfrkPj5+i6vrOz4z0rDmQQi6ZpxWLR+cGwSzqd9l18n9YJGddbwxr3O7gjRCKRjx8/Or+35CsWi5XL5ef+XSmQQd6CCbG8NU/fL/1MzDCMnZ2d+/v7Vqtl/y+epmnWNx7j8XgymRzxKhLgIBNjQiyB/V8h4MS/2EMEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUEEYUHEvyMk5JrjtRNHAAAAAElFTkSuQmCC" alt="头像">
+                    </div>
+                    <div class="line" :style="{ backgroundColor:style.co_line }"></div>
+                    <div class="info">
+                        <div class="title" :style="{ color:style.co_title }">
+                            <p class="e_name" v-text="info.e_name? info.e_name : 'NAME'"></p>
+                            <p class="c_name" v-text="info.c_name ? info.c_name:'姓名'"></p>
+                            <div class="hr" :style="{ backgroundColor:style.co_title }"></div>
+                            <p class="group" v-text="info.group ? info.group:'所属部门'"></p>
+                        </div>
+                        <div class="contact" :style="{ color: style.co_item }">
+                            <div class="item">
+                                <i class="icon-mobile mobile" :style="{ color:style.co_icon }"></i> 
+                                <p v-text="(info.contact.phone?info.contact.phone:'123-4567-8901') | formatTelNo "></p>
+                            </div>
+                            <div class="item">
+                                <i class="icon-call call" :style="{ color:style.co_icon }"></i>
+                                <p v-text="(info.contact.call?info.contact.call:'0755-32995555-1234') | formatOfficeNo"></p>
+                            </div>
+                            <div class="item">
+                                <i class="icon-qq qq" :style="{ color:style.co_icon }"></i>
+                                <p v-text="info.contact.qq ? info.contact.qq:'your QQ'"></p>
+                            </div>
+                            <div class="item">
+                                <i class="icon-wechat wechat" :style="{ color:style.co_icon }"></i>
+                                <p v-text="info.contact.wechat ? info.contact.wechat:'your wechat'"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="o2_form_row">
-            <label for="c_name" class="o2_label">中文名</label>
-            <input type="text" class="o2_input_text"  name="c_name" placeholder="中文名" v-model="info.c_name" debounce="500">
-          </div>
-          <div class="o2_form_row">
-            <label for="e_name" class="o2_label">英文名</label>
-            <input type="text" class="o2_input_text" name="e_name" placeholder="英文名" v-model="info.e_name" debounce="500">
-          </div>
-          <div class="o2_form_row">
-            <label for="group" class="o2_label">所属部门</label>
-            <input type="text" class="o2_input_text" name="group" placeholder="所属部门小组" v-model="info.group" debounce="500">
-          </div>
-          <div class="o2_form_row">
-            <label for="phone" class="o2_label">手机号码</label>
-            <input type="text" class="o2_input_text" name="phone" placeholder="手机号码" v-model="info.contact.phone" debounce="500">
-          </div>
-          <div class="o2_form_row">
-            <label for="call" class="o2_label">办公号码</label>
-            <input type="text" class="o2_input_text" name="call" placeholder="办公号码" v-model="info.contact.call" debounce="500">
-          </div>
-          <div class="o2_form_row">
-            <label for="qq" class="o2_label">QQ</label>
-            <input type="text" class="o2_input_text" name="qq" placeholder="QQ" v-model="info.contact.qq" debounce="500" >
-          </div>
-          <div class="o2_form_row">
-            <label for="wechat" class="o2_label">微信</label>
-            <input type="text" class="o2_input_text" name="wechat" placeholder="微信" v-model="info.contact.wechat" debounce="500" >
-          </div>
-          <div class="o2_btns btn_download">
-            <a href="javascript:;" class="o2_btn bg1 " v-on:click="downloadRes()">生成签名</a>  
-          </div>
-        </div>
-        <!-- E input -->
-        <!-- S more -->
-        <div class="o2_form">
-          <div class="o2_form_row">
-            <label  class="o2_label">Logo</label>
-            <div class="o2_input_file">
-              <span class="o2_input_name">上传图片</span>
-              <input type="file" class="J_uploadImage" data-dest="logo">
-            </div>
-          </div>
-          <div class="o2_form_row">
-            <label  class="o2_label">分割线</label>
-            <div class="o2_input_color">
-              <input type="color"  v-model="style.co_line">
-              <input type="text" class="o2_input_text"  v-model="style.co_line | formatColor" debounce="500">
-            </div>
-          </div>
-          <div class="o2_form_row">
-            <label  class="o2_label">名字\分组</label>
-            <div class="o2_input_color">
-              <input type="color"  v-model="style.co_title">
-              <input type="text" class="o2_input_text"  v-model="style.co_title | formatColor" debounce="500">
-            </div>
-          </div>
-          <div class="o2_form_row">
-            <label  class="o2_label">个人信息</label>
-            <div class="o2_input_color">
-              <input type="color"  v-model="style.co_item">
-              <input type="text" class="o2_input_text"  v-model="style.co_item | formatColor" debounce="500">
-            </div>
-          </div>
-          <div class="o2_form_row">
-            <label  class="o2_label">图标颜色</label>
-            <div class="o2_input_color">
-              <input type="color"   v-model="style.co_icon">
-              <input type="text" class="o2_input_text"  v-model="style.co_icon | formatColor"  debounce="500">
-            </div>
-          </div>
-          <div class="o2_form_row">
-            <label  class="o2_label">面板底色</label>
-            <div class="o2_input_color">
-              <input type="color" v-model="style.co_bg">
-              <input type="text" class="o2_input_text"  v-model="style.co_bg | formatColor" v-validate="{color:style.co_bg}">
-            </div>
-          </div>
-          <div class="o2_btns">
-            <a href="javascript:;" class="o2_btn bg2" v-on:click="resetColors()">重置</a>
-            <a href="javascript:;" class="o2_btn bg1" v-on:click="flag.showColorSetting=false">保存并返回</a>
-          </div>
-        </div>
-        <!-- E more-->
-      </div>
-    </div>
-    <!-- E content-->
-  </div>
-  <!-- E main-->
+            <!-- E preview -->
 
-  <!-- S cropper -->
-  <div class="o2_alert_mask" v-bind:class="{'show':flag.imgHasLoad}" ></div>
-  <div class="o2_alert" v-bind:class="{'show':flag.imgHasLoad}" >
-    <span class="o2_alert_close" v-on:click="flag.imgHasLoad=false;"></span>
-    <div class="cropper">
-      <div class="cropper_box" id="cropperBox">
-        <img src="img/200x200.png" style="width:100px;height:100px;" id="uploadPreview">
-      </div>
-      <div class="cropper_res_wrap">
-        <div class="cropper_res" id="cropperRes">
-          <img src="img/200x200.png" style="width:100px;height:100px;">
+            <!-- S content -->
+            <div class="o2_content" >
+                <div class="o2_content_slider" v-bind:class="{'slide':flag.showColorSetting}">
+                    <!-- S input -->
+                    <div class="o2_form">
+                        <div class="o2_form_row o2_input_required">
+                            <label for="image" class="o2_label">头像</label>
+                            <div class="o2_input_file">
+                                <span class="o2_input_name">上传图片</span>
+                                <input type="file" class="J_uploadImage" data-dest="img">
+                            </div>
+                        </div>
+                        <div class="o2_form_row">
+                            <label for="c_name" class="o2_label">中文名</label>
+                            <input type="text" class="o2_input_text"  name="c_name" placeholder="中文名" v-model="info.c_name" debounce="500">
+                        </div>
+                        <div class="o2_form_row">
+                            <label for="e_name" class="o2_label">英文名</label>
+                            <input type="text" class="o2_input_text" name="e_name" placeholder="英文名" v-model="info.e_name" debounce="500">
+                        </div>
+                        <div class="o2_form_row">
+                            <label for="group" class="o2_label">所属部门</label>
+                            <input type="text" class="o2_input_text" name="group" placeholder="所属部门小组" v-model="info.group" debounce="500">
+                        </div>
+                        <div class="o2_form_row">
+                            <label for="phone" class="o2_label">手机号码</label>
+                            <input type="text" class="o2_input_text" name="phone" placeholder="手机号码" v-model="info.contact.phone" debounce="500">
+                        </div>
+                        <div class="o2_form_row">
+                            <label for="call" class="o2_label">办公号码</label>
+                            <input type="text" class="o2_input_text" name="call" placeholder="办公号码" v-model="info.contact.call" debounce="500">
+                        </div>
+                        <div class="o2_form_row">
+                            <label for="qq" class="o2_label">QQ</label>
+                            <input type="text" class="o2_input_text" name="qq" placeholder="QQ" v-model="info.contact.qq" debounce="500" >
+                        </div>
+                        <div class="o2_form_row">
+                            <label for="wechat" class="o2_label">微信</label>
+                            <input type="text" class="o2_input_text" name="wechat" placeholder="微信" v-model="info.contact.wechat" debounce="500" >
+                        </div>
+                        <div class="o2_btns btn_download">
+                            <a href="javascript:;" class="o2_btn bg1 " v-on:click="downloadRes()">生成签名</a>  
+                        </div>
+                    </div>
+                    <!-- E input -->
+                    <!-- S more -->
+                    <div class="o2_form">
+                        <div class="o2_form_row">
+                            <label  class="o2_label">Logo</label>
+                            <div class="o2_input_file">
+                                <span class="o2_input_name">上传图片</span>
+                                <input type="file" class="J_uploadImage" data-dest="logo">
+                            </div>
+                        </div>
+                        <div class="o2_form_row">
+                            <label  class="o2_label">分割线</label>
+                            <div class="o2_input_color">
+                                <input type="color"  v-model="style.co_line">
+                                <input type="text" class="o2_input_text"  v-model="style.co_line | formatColor" debounce="500">
+                            </div>
+                        </div>
+                        <div class="o2_form_row">
+                            <label  class="o2_label">名字\分组</label>
+                            <div class="o2_input_color">
+                                <input type="color"  v-model="style.co_title">
+                                <input type="text" class="o2_input_text"  v-model="style.co_title | formatColor" debounce="500">
+                            </div>
+                        </div>
+                        <div class="o2_form_row">
+                            <label  class="o2_label">个人信息</label>
+                            <div class="o2_input_color">
+                                <input type="color"  v-model="style.co_item">
+                                <input type="text" class="o2_input_text"  v-model="style.co_item | formatColor" debounce="500">
+                            </div>
+                        </div>
+                        <div class="o2_form_row">
+                            <label  class="o2_label">图标颜色</label>
+                            <div class="o2_input_color">
+                                <input type="color"   v-model="style.co_icon">
+                                <input type="text" class="o2_input_text"  v-model="style.co_icon | formatColor"  debounce="500">
+                            </div>
+                        </div>
+                        <div class="o2_form_row">
+                            <label  class="o2_label">面板底色</label>
+                            <div class="o2_input_color">
+                                <input type="color" v-model="style.co_bg">
+                                <input type="text" class="o2_input_text"  v-model="style.co_bg | formatColor" v-validate="{color:style.co_bg}">
+                            </div>
+                        </div>
+                        <div class="o2_btns">
+                            <a href="javascript:;" class="o2_btn bg2" v-on:click="resetColors()">重置</a>
+                            <a href="javascript:;" class="o2_btn bg1" v-on:click="flag.showColorSetting=false">保存并返回</a>
+                        </div>
+                    </div>
+                    <!-- E more-->
+                </div>
+            </div>
+            <!-- E content-->
         </div>
-      </div>
-    </div>
-    <div class="o2_btns cropper_btn">
-      <a href="javascript:;" class="o2_btn bg1" v-on:click="finishCropImage()">完成</a>
-    </div>
-  </div>
-  <!-- E cropper -->
+        <!-- E main-->
 
-  <!-- S scripts -->
-  <script src="/js/vue.min.js"></script>
-  <script src="/js/cropper.min.js"></script>
-  <script src="/js/dom-to-image.min.js"></script>
-  <script src="/js/FileSaver.min.js"></script>
-  <script src="/js/sign.js"></script>
-  <!-- E scripts -->
+        <!-- S cropper -->
+        <div class="o2_alert_mask" v-bind:class="{'show':flag.imgHasLoad}" ></div>
+        <div class="o2_alert" v-bind:class="{'show':flag.imgHasLoad}" >
+            <span class="o2_alert_close" v-on:click="flag.imgHasLoad=false;"></span>
+            <div class="cropper">
+                <div class="cropper_box" id="cropperBox">
+                    <img src="http://fpoimg.com/200x200" style="width:100px;height:100px;" id="uploadPreview">
+                </div>
+                <div class="cropper_res_wrap">
+                    <div class="cropper_res" id="cropperRes">
+                        <img src="http://fpoimg.com/200x200" style="width:100px;height:100px;">
+                    </div>
+                </div>
+            </div>
+            <div class="o2_btns cropper_btn">
+                <a href="javascript:;" class="o2_btn bg1" v-on:click="finishCropImage()">完成</a>
+            </div>
+        </div>
+        <!-- E cropper -->
+    </main>
+
+    <!-- S scripts -->
+    <script src="/js/vue.min.js"></script>
+    <script src="/js/cropper.min.js"></script>
+    <script src="/js/dom-to-image.min.js"></script>
+    <script src="/js/FileSaver.min.js"></script>
+    <script src="/js/sign.js"></script>
+    <!-- E scripts -->
 </body>
 </html>
