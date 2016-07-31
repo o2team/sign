@@ -50,7 +50,6 @@ Vue.directive('validate', {
         if(value.hasOwnProperty('color')){ //检测颜色值是否有效
             var thisEl = this.el;
             if(!/^#(?:[0-9a-fA-F]{3}){1,2}$/.test(value.color)){
-                console.log(value.color);
                 thisEl.classList.add('error');
             }else {
                 if(thisEl.classList.contains('error')){
@@ -113,9 +112,7 @@ var sign = new Vue({
             var thisObj = this;
             var t = null;
             var func = function(){
-                console.log('tes');
                 thisObj.flag.isPC = screen.width<=600?true:false;
-                console.log(thisObj.flag.isPC);
                 return;
             };
             func();
