@@ -154,7 +154,8 @@ body {
     left: 0;
     width: 100%;
     padding: 28px 46px 0 46px;
-    z-index: 1; }
+    z-index: 1;
+    min-width: 560px; }
     .o2_cover .o2_cover_hd h1 {
       float: left;
       color: transparent; }
@@ -165,7 +166,9 @@ body {
         height: 43px;
         background: transparent url(../images/o2_logo.png) no-repeat; }
     .o2_cover .o2_cover_hd .lnks {
-      float: right;
+      position: absolute;
+      right: 46px;
+      top: 40px;
       font-size: 18px;
       line-height: 1; }
       .o2_cover .o2_cover_hd .lnks a {
@@ -612,3 +615,37 @@ input::-webkit-input-placeholder {
       overflow: hidden;
       border: 1px solid #999;
       background-color: #fff; }
+
+/* o2_tip
+---------------------------------------- */
+.o2_tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  text-align: center;
+  background: url(../images/cover_bg_mobile.png) no-repeat; }
+  .o2_tip .icon_logo {
+    margin: 100px auto 10px auto;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    background: #648fe7 url(../images/sign_logo.png) center no-repeat;
+    background-size: 50px auto; }
+  .o2_tip .name {
+    color: #fff;
+    font-size: 32px; }
+  .o2_tip p {
+    color: rgba(255, 255, 255, 0.9); }
+  .o2_tip small {
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    background: rgba(0, 0, 0, 0.15); }

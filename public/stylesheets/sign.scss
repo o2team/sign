@@ -65,6 +65,7 @@ $c_input: #1abc9c;
 		width: 100%;
 		padding: 28px 46px 0 46px;
 		z-index: 1;
+		min-width: 560px;
 		h1 {
 			.o2_logo {
 				display: inline-block;
@@ -77,7 +78,9 @@ $c_input: #1abc9c;
 			color: transparent;
 		}
 		.lnks {
-			float: right;
+			position: absolute;
+			right: 46px;
+			top: 40px;
 			font-size: 18px;
 			line-height: 1;
 			a { 
@@ -622,31 +625,42 @@ input::-webkit-input-placeholder {
 	}
 }
 
-// /* vue transition 
-// ---------------------------------------- */
-// // alert
-// .alert-transition {
-//   transition: all .3s ease;
-//   visibility: visible;
-//   transform: scale(1);
-//   -webkit-transform: scale(1);
-// }
 
-// .alert-enter, .alert-leave {
-//   visibility: hidden;
-//   -webkit-transform: scale(.3);
-//   transform: scale(.3);
-
-// }
-
-// // expand
-// .expand-transition {
-//   transition: all .3s ease;
-//   visibility: visible;
-//   height: 100%;
-// }
-// .expand-enter, .expand-leave {
-//   visibility: hidden;
-//   height: 0;
-
-// }
+/* o2_tip
+---------------------------------------- */
+.o2_tip {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 20;
+	text-align: center;
+	background: url(../images/cover_bg_mobile.png) no-repeat;
+	.icon_logo {
+		margin: 100px auto 10px auto;
+		display: block;
+		width: 100px;
+		height: 100px;
+		border-radius: 50px;
+		-webkit-border-radius: 50px;
+		background: $c_o2_blue url(../images/sign_logo.png) center no-repeat;
+		background-size: 50px auto;
+	}
+	.name {
+		color: #fff;
+		font-size: 32px;
+	}
+	p {
+		color: rgba(#fff,.9);
+	}
+	small {
+		margin-top: 10px;
+		color: rgba(#fff,.9);
+		display: inline-block;
+		padding: 5px 10px;
+		border-radius: 15px;
+		-webkit-border-radius: 15px;
+		background: rgba(#000,.15);
+	}
+}
