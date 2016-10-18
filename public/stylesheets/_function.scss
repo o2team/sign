@@ -1,0 +1,210 @@
+@charset "utf-8";
+
+// 颜色
+$color_red: #e4393c !default;
+$color_jd_base: #e4393c !default;
+$color_blue: #3985ff !default;
+
+// 边框颜色
+$color_bor: #ddd;
+$color_bor_out: #ccc;
+
+// 英文字体
+%font_arial {
+    font-family: arial;
+}
+
+// 文字隐藏
+%text_indent {
+    font-size: 0;
+    color: rgba(0,0,0,0);
+    text-indent: -9999em;
+    overflow: hidden;
+}
+
+// 文字自动换行
+%text_break {
+    word-break: break-all;
+}
+
+// 文字省略：单行
+%text_oneline {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+// 文字省略：两行
+%text_twoline {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+// 文字省略：自定义多行
+@mixin elli($elli) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $elli;
+    -webkit-box-orient: vertical;
+}
+
+// 圆角
+@mixin radius($radius) {
+    -webkit-border-radius: $radius;
+    border-radius: $radius;
+}
+
+// flex 布局
+%box {
+	display: box;
+	display: -ms-box;
+	display: -webkit-box;
+	display: flex;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+}
+// 垂直居中
+%box_center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+%flex {
+	display: block;
+	flex: 1;
+	-ms-flex: 1;
+	-webkit-flex: 1;
+	box-flex: 1;
+	-ms-box-flex: 1;
+	-webkit-box-flex: 1;
+}
+// box-sizing
+%border_box {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+// 清除表单样式
+%input_clear {
+    border: none;
+    background: none;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+}
+
+// 固定定位条
+%fixedBar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	width: 100%;
+}
+
+// 块状，用于伪元素:after 或 :before
+%block {
+    content: '\20';
+    display: block;
+}
+
+// 清除浮动
+%clearfix {
+    &:after {
+        clear: both;
+        content: '\20';
+        display: block;
+    }
+}
+
+// select 图标
+%icon_select {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(/fd/base/img/base/icon_select.png) no-repeat 0 0;
+    background-size: 20px 60px;
+}
+
+// 箭头图标
+%arrow {
+    @extend %block;
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid #7d7d7d;
+    border-left: 1px solid #7d7d7d;
+    background: none;
+}
+%arrow_top {
+    @extend %arrow;
+    margin-top: -2px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+%arrow_right {
+    @extend %arrow;
+    margin-top: -6px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+%arrow_bottom {
+    @extend %arrow;
+    margin-top: -10px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+%arrow_left {
+    @extend %arrow;
+    margin-top: -6px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+// 常用按钮配色
+@mixin btn_bgColor($color) {
+    background: $color;
+    &:active {background: darken($color,5%);}
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+// 默认 灰色
+%btn_bgColor {@include btn_bgColor(#F3F3F3);}
+// 红色
+%btn_bgColor_bg_1 {@include btn_bgColor(#e4393c);}
+// 蓝色
+%btn_bgColor_bg_2 {@include btn_bgColor(#3884ff);}
+// 橙色
+%btn_bgColor_bg_3 {@include btn_bgColor(#f19325);}
+// 白色
+%btn_bgColor_bg_4 {@include btn_bgColor(#fff);}
+// 绿色
+%btn_bgColor_bg_5 {@include btn_bgColor(#67ad03);}
+// 蓝绿色
+%btn_bgColor_bg_6 {@include btn_bgColor(#1bc6c3);}
+// 黑色
+%btn_bgColor_bg_7 {@include btn_bgColor(#666);}
+// 淡蓝色
+%btn_bgColor_bg_8 {@include btn_bgColor(#32b8ea);}
+// 淡绿色
+%btn_bgColor_bg_9 {@include btn_bgColor(#18c461);}
+// disabled
+%btn_bgColor_bg_disabled {
+    cursor: default;
+    color: #999;
+    background: #d7d7d7;
+    border: 1px solid transparent;
+    span {
+        margin-left: 5px;
+        color: #e4393c;
+    }
+    &:active {
+        background: #d7d7d7;
+    }
+}
+%btn_bgColor, %btn_bgColor_bg_4 {
+   border-color: #ddd;
+   color: #333; 
+}
